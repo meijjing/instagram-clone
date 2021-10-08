@@ -21,6 +21,22 @@
   }
 }
 
+.mobile-screen {
+  @media (max-width: 754px) {
+    display: flex;
+    flex-direction: column!important;
+    justify-content: center!important;
+    align-items: center!important;
+  }
+}
+
+.margin-zero {
+  @media (max-width: 754px) {
+    margin: 4px auto!important;
+    margin-left: 0;
+  }
+}
+
 .constrain {
   max-width: 975px;
   margin: 0 auto;

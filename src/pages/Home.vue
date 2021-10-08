@@ -43,10 +43,7 @@
 
         <template v-else-if="!loadingPosts && !posts.length">
           <h5 class="text-center text-grey">포스트가 없습니다.</h5>
-
         </template>
-
-
 
         <template v-else>
           <q-card flat bordered>
@@ -75,8 +72,11 @@
         </template>
       </div>
 
+
+
+
       <div class="col-4 large-screen-only">
-        <q-item class="fixed">
+        <!-- <q-item class="fixe row bg-white">
           <q-item-section avatar>
             <q-avatar
             size="48px">
@@ -90,7 +90,49 @@
               Seoul, Korea
             </q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
+
+
+        <q-card class="my-card text-black">
+          <q-item class="fixe row bg-white">
+            <q-item-section avatar>
+              <q-avatar
+              size="48px">
+                <img src="https://cdn.quasar.dev/img/boy-avatar.png" alt="" />
+              </q-avatar>
+            </q-item-section>
+
+            <q-item-section>
+              <q-item-label>K_meijjing</q-item-label>
+              <q-item-label caption>
+                Seoul, Korea
+              </q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-separator />
+
+          <q-card-actions class="profile_tabs mobile-screen">
+            <q-btn flat class="margin-zero">
+              <div class="col-12">{{ postNo }}</div>
+              <div>게시글</div>
+            </q-btn>
+            <q-btn flat class="margin-zero">
+              <div class="col-12">{{ followerNo }}</div>
+              <div>팔로워</div>
+            </q-btn>
+            <q-btn flat class="margin-zero">
+              <div class="col-12">{{ followNo }}</div>
+              <div>팔로우</div>
+            </q-btn>
+          </q-card-actions>
+
+
+          
+        </q-card>
+
+
+
 
       </div>
     </div>
@@ -101,11 +143,22 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { date } from 'quasar'
 
 export default defineComponent({
   name: 'Home',
+  setup() {
+    const postNo = ref(0)
+    const followerNo = ref(1)
+    const followNo = ref(2)
+
+    return {
+      postNo,
+      followerNo,
+      followNo,
+    }
+  },
   data() {
     return {
       posts: [],
@@ -125,6 +178,7 @@ export default defineComponent({
         console.log(response);
         this.posts = response.data
         this.loadingPosts = false
+        this.postNo = this.posts.length
       }).catch((err) => {
         console.log(err);
         this.$q.dialog({
@@ -142,5 +196,10 @@ export default defineComponent({
   .q-img {
     min-height: 200px
   }
+}
+
+.profile_tabs {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

@@ -23,6 +23,16 @@
           Instagram
         </q-toolbar-title>
 
+
+        <q-btn
+        to="/login"
+        dense
+        flat
+        round
+        icon="login"
+        size="18px"
+        class="large-screen-only" />
+
         <q-btn
         to="/"
         dense
@@ -31,6 +41,8 @@
         icon="home"
         size="18px"
         class="large-screen-only" />
+        
+        
       </q-toolbar>
     </q-header>
 

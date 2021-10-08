@@ -29,7 +29,7 @@
       <!-- 이미지 파일 -->
       <q-file
         v-else
-        v-model="imageUpload"
+        v-model="this.post.photo"
         label="Choose an image"
         outlined
         accept="image/*"
@@ -235,16 +235,17 @@ export default {
       formData.append('caption', this.post.caption)
       formData.append('location', this.post.location)
       formData.append('date', this.post.date)
-      // formData.append('imageUrl', this.post.photo[0], this.post.id + '.png')
-      // console.log(this.post.photo);
-      // console.log(this.post.photo.path[0].files[0]);
+      // formData.append('imageUrl', this.post.photo, this.post.id + '.png')
+      formData.append('imageUrl', this.post.photo)
 
-      // this.$axios.post(`${ process.env.API }/createPost`, formData).then(response => {
-      //   console.log(response)
-      //   // console.log(formData)
-      // }).catch(error => {
-      //   console.log(error)
-      // })
+
+
+      this.$axios.post(`${ process.env.API }/createPost`, formData).then(response => {
+        console.log(response)
+        // console.log(formData)
+      }).catch(error => {
+        console.log(error)
+      })
     }
   }
 }

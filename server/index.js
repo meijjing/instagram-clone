@@ -4,6 +4,9 @@
 const express = require("express");
 var admin = require("firebase-admin");
 
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+
 /*
   config - express
 */
@@ -21,6 +24,8 @@ admin.initializeApp({
 
 const db = admin.firestore();
 let bucket = admin.storage().bucket();
+
+
 
 /*
   endpoint - read post
@@ -50,13 +55,38 @@ app.post("/createPost", (request, response) => {
   response.set("Access-Control-Allow-Origin", "*");
 
   let fileData = {};
+  console.log(fileData);
 
   // db.collection('posts').doc('').set()
   // response.send(response);
   console.log(response);
 });
 
+
+
+
+// Auth
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+
+ui.start('#firebaseui-auth-container', {
+  signInOptions: [
+    {
+      provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+    }
+  ],
+  // Other config options...
+});
+
+
+
+
+
+
 /*
   listen
 */
 app.listen(process.env.PORT || 3000);
+
